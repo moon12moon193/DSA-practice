@@ -1,17 +1,16 @@
-# 🔢 Squares of a Sorted Array (LeetCode #977)
+# Squares of a Sorted Array — LeetCode 977
 
-## 🔹 Problem Statement
+## 📌 Problem Statement
 
-Given an integer array `nums` sorted in non-decreasing order, return an array of the squares of each number, also sorted in non-decreasing order.
+Given an integer array `nums` sorted in non-decreasing order, return an array of the squares of each number sorted in non-decreasing order.
 
----
-
-## 🔹 Example
+### Example
 
 Input:
 
 
-nums = [-4,-1,0,3,10]
+[-4,-1,0,3,10]
+
 
 Output:
 
@@ -19,54 +18,155 @@ Output:
 [0,1,9,16,100]
 
 
-Explanation:
+---
 
-* Squares: [16,1,0,9,100]
-* After sorting: [0,1,9,16,100]
+# 💡 Approach Used
+
+This solution uses a **merge-style technique**.
+
+The array is already sorted, but after squaring:
+
+* negative numbers become positive
+* order may break
+
+Example:
+
+
+[-4,-1,0,3]
+
+
+After squaring:
+
+
+[16,1,0,9]
+
+
+Now:
+
+* left side (squared negatives) is in decreasing order
+* right side is already increasing
+
+So we merge both parts similarly to merge sort.
 
 ---
 
-## 🔹 My Approach
+# ⚙️ Steps of Algorithm
 
-* Traverse the array and square each element
-* After squaring, the array may become unsorted
-* Apply sorting to arrange elements in increasing order
+## 1. Find First Non-Negative Element
 
-👉 Idea:
 
-> First transform values, then sort to restore order
+while(i < nums.size() && nums[i] < 0)
+
+
+This divides array into:
+
+* negative part
+* non-negative part
 
 ---
 
+## 2. Square Every Element
 
 
-## 🔹 Key Concepts
+nums[k] = nums[k] * nums[k];
 
+
+Now all values become positive.
+
+---
+
+## 3. Handle Edge Cases
+
+### Case 1: No negative numbers
+
+Array is already sorted after squaring.
+
+
+if(i == 0)
+
+
+---
+
+### Case 2: All numbers were negative
+
+After squaring, order becomes reversed.
+reverse(nums.begin(), nums.end());
+
+
+---
+
+## 4. Merge Both Sorted Parts
+
+Use:
+
+* `j` → squared negative side
+* `i` → squared positive side
+
+Compare both and insert smaller value into result array.
+
+This produces final sorted squares array.
+
+---
+
+# 🧠 Time Complexity
+
+## Finding partition
+
+
+O(n)
+
+
+## Squaring elements
+
+
+O(n)
+
+
+## Merge process
+
+O(n)
+
+
+## Overall Time Complexity
+
+O(n)
+
+
+---
+
+# 💾 Space Complexity
+
+Extra result vector used:
+
+
+O(n)
+
+
+---
+
+# ✅ Key Concepts Used
+
+* Two pointers
+* Merge technique
 * Array traversal
-* Element transformation (squaring)
-* Sorting
+* In-place squaring
+* Edge case handling
 
 ---
 
-## 🔹 Time and Space Complexity
+# 🚨 Important Bug Avoided
 
-* Time Complexity: O(n log n) (due to sorting)
-* Space Complexity: O(1) (in-place modification, ignoring output)
+Correct condition order:
 
----
 
-## 🔹 Edge Cases
+while(i < nums.size() && nums[i] < 0)
 
-* All negative numbers
-* All positive numbers
-* Includes zero
+
+Bounds check must come first to avoid out-of-range access.
 
 ---
 
-## 🔹 Summary
+# ✅ Final Notes
 
-* Square each element
-* Sort the array
-* Return the result
+This solution efficiently solves the problem in linear time using a merge-style strategy inspired by merge sort.
 
-👉 Simple and straightforward solution using sorting
