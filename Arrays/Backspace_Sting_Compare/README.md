@@ -1,276 +1,203 @@
-# Backspace String Compare
+# Backspace String Compare — LeetCode 844
 
-## Problem Statement
+## 📌 Problem Statement
 
-Given two strings `s` and `t` containing:
+Given two strings `s` and `t`, return `true` if they are equal when both are typed into empty text editors.
 
-* lowercase letters
-* `#` characters
-
-The `#` symbol represents a:
+The character:
 
 
-backspace
+'#'
 
 
-which removes the previous valid character.
-
-Return:
-
-* `true` if both processed strings are equal
-* `false` otherwise
+means a backspace character.
 
 ---
 
-# Example
+## 🧠 Example
 
-## Input
-
-
-s = "ab##"
-t = "c#d#"
+### Example 1
 
 
----
+Input:
+s = "ab#c"
+t = "ad#c"
 
-## Processing `s`
-
-
-"a"
-"ab"
-"a"
-""
-
-
-Final string:
-
-
-""
-
-
----
-
-## Processing `t`
-
-
-"c"
-""
-"d"
-""
-
-
-Final string:
-
-
-""
-
-
----
-
-## Output
-
-
+Output:
 true
 
 
-because both processed strings are equal.
+### Explanation
+
+
+"ab#c"  -> "ac"
+"ad#c"  -> "ac"
+
+
+Both become equal.
 
 ---
 
-# Approach
+# 💡 Approach Used
 
-The solution uses:
+This solution simulates typing into a text editor.
+
+We create a helper function:
 
 
-in-place string processing
+removeCharacters()
 
 
-to simulate backspaces efficiently.
+which processes the string and removes characters whenever `#` appears.
 
----
-
-# removeCharacters() Function
-
-This function:
-
-* traverses the string
-* keeps valid characters
-* removes previous characters when `#` appears
-* resizes the string to valid length
+Then both processed strings are compared.
 
 ---
 
-# Core Idea
+# ⚙️ Algorithm
 
-A pointer `j` tracks:
+## Step 1: Process the String
 
+Traverse the string:
 
+* If character is a lowercase letter:
 
+  * store it
+* If character is `#`:
 
----
+  * remove the previously stored character (if available)
 
-## If character is alphabet
-
-Store it at:
-
-
-str[j]
-
-
-then increment `j`.
+This behaves exactly like backspace typing.
 
 ---
 
-## If character is `#`
+## Step 2: Compare Processed Strings
 
-Move `j` backward:
+After processing both strings:
 
-
-logical deletion of previous valid character
-
-
----
-
-# Dry Run
-
-## Input
-
-
-"ab#c"
-
+* If lengths differ → return `false`
+* Otherwise compare character by character
 
 ---
 
-| Character | Action   | Valid String |
-| --------- | -------- | ------------ |
-| a         | keep     | a            |
-| b         | keep     | ab           |
-| #         | remove b | a            |
-| c         | keep     | ac           |
-
----
-
-Final string:
-
-
-"ac"
-
-
----
-
-# EqualStrs() Function
-
-This function:
-
-* first checks lengths
-* then compares characters one-by-one from end
-
-If any mismatch occurs:
-
-
-return false
-
-
-Otherwise:
-
-
-return true
-
-
----
-
-# Time Complexity
+# ✅ Time Complexity
 
 ## removeCharacters()
 
-Each string traversed once:
+Each character is visited once.
 
 
-O(n)
+Time Complexity: O(n)
 
 
 ---
 
 ## EqualStrs()
 
-String comparison:
+Compares all characters once.
 
 
-O(n)
+Time Complexity: O(n)
 
 
 ---
 
-# Overall Time Complexity
+## Overall Complexity
 
 
-O(n + m)
+Time Complexity: O(n + m)
 
 
 where:
 
-* `n` = length of first string
-* `m` = length of second string
+* `n` = length of string `s`
+* `m` = length of string `t`
 
 ---
 
-# Space Complexity
+# ✅ Space Complexity
 
-In-place processing uses:
+Extra processed strings are created.
 
 
+Space Complexity: O(n + m)
 
-extra auxiliary space.
 
 ---
 
-# Code
+# 🔍 Dry Run
+
+## Input
 
 
-class Solution {
-public:
-string removeCharacters(string str){
-    int j=0;
-
-    for(int i=0;i<str.length();i++){
-        if(i==0 && str[i]=='#'){
-            continue;
-        }
-        if(str[i]>='a' && str[i]<='z'){
-            str[j]=str[i];
-            j++;
-        }else{
-            if(j>0){
-                j=j-1;
-            }
-        }
-    }
-    str.resize(j);
-    return str;
-}
+s = "ab#c"
+t = "ad#c"
 
 
-bool EqualStrs(string str1,string str2){
-    if(str1.length()!=str2.length()){
-        return false;
-    }else{
-        int i=str1.length()-1;
-        int j=str2.length()-1;
-        while(i>=0 && j>=0){
-            if(str1[i]!=str2[j]){
-                return false;
-            }
-            i--;
-            j--;
-        }
-        return true;
-    }
-}
-    bool backspaceCompare(string s, string t) {
-        string str1=removeCharacters(s);
-        string str2=removeCharacters(t);
-        bool ans=EqualStrs(str1,str2);
-        return ans;
-        
-    }
+---
+
+## Processing `s`
+
+| Character | Action   | Result |
+| --------- | -------- | ------ |
+| a         | add      | a      |
+| b         | add      | ab     |
+| #         | remove b | a      |
+| c         | add      | ac     |
+
+Final:
+
+
+ac
+
+
+---
+
+## Processing `t`
+
+| Character | Action   | Result |
+| --------- | -------- | ------ |
+| a         | add      | a      |
+| d         | add      | ad     |
+| #         | remove d | a      |
+| c         | add      | ac     |
+
+Final:
+
+
+ac
+
+
+---
+
+## Comparison
+
+
+ac == ac
+
+
+Return:
+
+
+true
+
+
+---
+
+
+
+
+# 🎯 Key Learning
+
+This problem teaches:
+
+* String simulation
+* Two-pointer style processing
+* In-place modification
+* Handling backspace operations efficiently
+
+---
+
+
+
 
