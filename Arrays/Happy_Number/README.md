@@ -74,7 +74,7 @@ No extra data structures used.
 
 ---
 
----
+
 Example
 Input: 19
 
