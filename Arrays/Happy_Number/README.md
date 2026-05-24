@@ -73,11 +73,7 @@ O(1)
 No extra data structures used.
 
 ---
-Key Learnings
-Digit extraction using % and /
-Graph like behaviour of numbers
-Cycle detection using slow and fast pointers
-Constant space optimization
+
 ---
 Example
 Input: 19
@@ -89,7 +85,11 @@ Output: True
 ---
 Summary
 
-✔ No extra memory used
-✔ Cycle detection via pointers
-✔ Clean mathematical simulation
-✔ Efficient and optimal approach
+ No extra memory used
+ 
+ Cycle detection via pointers
+ 
+ Clean mathematical simulation
+ 
+ Efficient and optimal approach
+ 
