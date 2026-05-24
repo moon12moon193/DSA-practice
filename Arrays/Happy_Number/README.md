@@ -75,8 +75,8 @@ No extra data structures used.
 ---
 Key Learnings
 Digit extraction using % and /
-Graph-like behavior of numbers
-Cycle detection using slow/fast pointers
+Graph like behaviour of numbers
+Cycle detection using slow and fast pointers
 Constant space optimization
 ---
 Example
