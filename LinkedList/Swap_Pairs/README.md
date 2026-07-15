@@ -420,4 +420,4 @@ public:
 - Leave the last node unchanged if the list contains an odd number of nodes.
 - The algorithm runs in **O(n)** time and uses **O(1)** extra space.
 
-> **Note:** This README explains the approach implemented in the provided code. A production-quality solution typically has the helper `reverse()` return the new head of the reversed segment, making the reconnection logic simpler and more explicit.
+
